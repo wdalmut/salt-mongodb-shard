@@ -16,6 +16,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     salt.verbose = true
     salt.run_highstate = true
     salt.install_type = "daily"
+    salt.pillar({
+        "hosts" => [
+            "127.0.0.1  localhost",
+            "192.168.10.201 mo1.local",
+            "192.168.10.202 mo2.local",
+            "192.168.10.203 mo3.local"
+        ]
+    })
   end
 
   config.vm.define :mo1 do |mo1|
