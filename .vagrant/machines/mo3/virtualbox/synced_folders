@@ -1,0 +1,1 @@
+{"virtualbox":{"/srv":{"guestpath":"/srv","hostpath":"/home/gianarb/git/vagrant-mongo-replica/deploy"},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/gianarb/git/vagrant-mongo-replica"}}}
