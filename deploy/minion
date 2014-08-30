@@ -218,3 +218,4 @@ grains:
     roles:
         - mongodb
         - dev
+    replica_set: rs0
