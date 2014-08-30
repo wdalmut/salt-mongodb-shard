@@ -7,6 +7,7 @@ mongodb:
     package_name: mongodb-org
     mongo_directory: /mongodb
     {% if replica_set != none %}
+    shard_srv: True
     replica_set:
         name: {{ replica_set }}
     {% endif %}
