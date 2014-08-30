@@ -1,7 +1,40 @@
-# Vagrantfile MongoDb ReplicaSet
-Configuration of mongoDb ReplicaSet with SaltStack
+# SaltStack MongoDB Sharding configuration
+
+Orchestrate MongoDB sharding with SaltStack.
+
+## Create replicas 
 
 ```
-git clone https://github.com/gianarb/vagrant-mongodb-replica --recursive
-vagrant up
+sudo salt-cloud -m /etc/salt/cloud.map.d/map-shard.conf -P
 ```
+
+## Configure your replica
+
+Use the mongo client
+
+```
+rs.initiate()
+
+conf = rs.conf()
+conf.members[0].host = "prod-aws-eu-mongo_rs0_1:27017"
+
+rs.reconfig(conf)
+
+rs.add("prod-aws-eu-mongo_rs0-2:27017")
+rs.addArb("prod-aws-eu-mongo_rs0-3:27017")
+```
+
+See your replica status
+
+
+```
+rs.status()
+```
+
+## Update mines
+
+```
+sudo salt '*' mine.update
+```
+
+
