@@ -9,6 +9,6 @@ base:
         - match: grain
         - mongodb.replica
         - mongodb.hosts
-    'roles:mongodb-cfg':
+    'roles:mongos':
         - match: grain
-        - mongodb.configsvr
+        - mongodb.mongos
