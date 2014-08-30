@@ -1,4 +1,5 @@
 {% set replica_set = salt['grains.get']('replica_set', none) %}
+{% set config_svr = salt['grains.get']('config_svr', False) %}
 
 mongodb:
     use_ppa: True
@@ -8,6 +9,9 @@ mongodb:
     {% if replica_set != none %}
     replica_set:
         name: {{ replica_set }}
+    {% endif %}
+    {% if config_svr == True %}
+    config_svr: True
     {% endif %}
     reconfigure_replica_set: False
     settings:
