@@ -4,7 +4,7 @@ base:
     'roles:mongodb':
         - match: grain
         - mongodb
-        - mongodb.replica
-    'roles:dev':
+    'roles:mongodb-repl':
         - match: grain
+        - mongodb.replica
         - mongodb.hosts
