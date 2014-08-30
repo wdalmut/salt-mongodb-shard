@@ -4,9 +4,10 @@ Orchestrate MongoDB sharding with SaltStack.
 
 ## Prepare volumes
 
+***PAY ATTENTION THAT ALL DATA INTO XVDF WILL BE DESTROYED!***
 ```
-sudo salt '*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
-sudo salt '*' extfs.mkfs /dev/xvdf1 fs_type=ext4
+sudo salt 'prod-aws-eu-mongo_rsX-*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
+sudo salt 'prod-aws-eu-mongo_rsX-*' extfs.mkfs /dev/xvdf1 fs_type=ext4
 ```
 
 ## Create replicas 
