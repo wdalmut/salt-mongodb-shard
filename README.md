@@ -2,6 +2,13 @@
 
 Orchestrate MongoDB sharding with SaltStack.
 
+## Prepare volumes
+
+```
+sudo salt '*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
+sudo salt '*' extfs.mkfs /dev/xvdf1 fs_type=ext4
+```
+
 ## Create replicas 
 
 ```
