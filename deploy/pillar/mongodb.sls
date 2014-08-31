@@ -16,6 +16,11 @@ mongodb:
     {% endif %}
     reconfigure_replica_set: False
     settings:
+        {% if config_svr == True %}
+        port: 27019
+        {% elif replica_set != none %}
+        port: 27018
+        {% endif %}
         db_path: /mongodb/data
         log_path: /mongodb/log
         log_append: True
