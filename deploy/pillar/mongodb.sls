@@ -34,5 +34,5 @@ mongos:
   settings:
     log_path: /mongodb/log
     log_file: /mongodb/log/mongos.log
-    config_svrs: "1.cfg.mongo.walterdalmut.com,2.cfg.mongo.walterdalmut.com,3.cfg.mongo.walterdalmut.com"
+    config_svrs: "ip-10-10-0-131:27019,ip-10-10-1-189:27019,ip-10-10-2-252:27019"
     port: 27017
