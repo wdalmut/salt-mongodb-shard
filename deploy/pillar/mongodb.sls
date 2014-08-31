@@ -21,3 +21,12 @@ mongodb:
         log_append: True
         rest: True
         bind_ip: 0.0.0.0
+
+mongos:
+  use_ppa: True
+  version: 2.6.4
+  package_name: mongodb-org-mongos
+  settings:
+    log_file: /mongodb/log/mongos.log
+    config_svrs: "1.cfg.mongo.walterdalmut.com,2.cfg.mongo.walterdalmut.com,3.cfg.mongo.walterdalmut.com"
+    port: 27017
