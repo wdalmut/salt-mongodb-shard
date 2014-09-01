@@ -2,23 +2,37 @@
 
 Orchestrate MongoDB sharding with SaltStack.
 
-## Prepare volumes
-
-***PAY ATTENTION THAT ALL DATA INTO XVDF WILL BE DESTROYED!***
-```
-sudo salt 'prod-aws-eu-mongo_rsX-*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
-sudo salt 'prod-aws-eu-mongo_rsX-*' extfs.mkfs /dev/xvdf1 fs_type=ext4
-```
-
-## Create replicas 
+## Create the whole stack using map
 
 ```
 sudo salt-cloud -m /etc/salt/cloud.map.d/map-shard.conf -P
 ```
 
+the map creates 4 shards (3 vm per shard, 2 replicas + 1 arbiter) than 3 config servers and 1 mongos instance.
+
+## Prepare volumes
+
+***PAY ATTENTION THAT ALL DATA INTO XVDF WILL BE DESTROYED!***
+
+Prepare shards disks
+
+```
+sudo salt 'prod-aws-eu-mongo_rsX-*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
+sudo salt 'prod-aws-eu-mongo_rsX-*' extfs.mkfs /dev/xvdf1 fs_type=ext4
+```
+
+Prepare config servers disks
+
+```
+sudo salt 'prod-aws-eu-mongo_cfg-*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
+sudo salt 'prod-aws-eu-mongo_cfg-*' extfs.mkfs /dev/xvdf1 fs_type=ext4
+```
+
+All mongos instances doesn't have any external volume.
+
 ## Configure your replica
 
-Use the mongo client
+Use the mongo client on each shard
 
 ```
 rs.initiate()
@@ -39,10 +53,16 @@ See your replica status
 rs.status()
 ```
 
-## Update mines
+## Configure your shard
+
+On one of your mongos
 
 ```
-sudo salt '*' mine.update
+sh.enableSharding("database")
+
+sh.shardCollection("database.collection", {field: 1})
 ```
 
+Here is the doc for sharding collection and the shard key:
+http://docs.mongodb.org/manual/reference/method/sh.shardCollection/
 
