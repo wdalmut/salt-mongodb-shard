@@ -21,13 +21,6 @@ sudo salt 'prod-aws-eu-mongo_rsX-*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk
 sudo salt 'prod-aws-eu-mongo_rsX-*' extfs.mkfs /dev/xvdf1 fs_type=ext4
 ```
 
-Prepare config servers disks
-
-```
-sudo salt 'prod-aws-eu-mongo_cfg-*' cmd.run 'echo -e "o\nn\np\n1\n\n\nw" | fdisk /dev/xvdf'
-sudo salt 'prod-aws-eu-mongo_cfg-*' extfs.mkfs /dev/xvdf1 fs_type=ext4
-```
-
 All mongos instances doesn't have any external volume.
 
 ## Configure your replica
