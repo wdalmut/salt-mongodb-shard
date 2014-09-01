@@ -58,6 +58,10 @@ rs.status()
 On one of your mongos
 
 ```
+sh.addShard("rs0/ip1:27018,ip2:27018,ip3:27018")
+```
+
+```
 sh.enableSharding("database")
 
 sh.shardCollection("database.collection", {field: 1})
